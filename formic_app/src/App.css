@@ -1,0 +1,23 @@
+input {
+  border: 1px lightseagreen solid;
+  border-radius: 5px;
+  padding: 3px;
+  margin: 5px;
+}
+
+label {
+  margin: 3px;
+  display: block;
+}
+
+.form {
+  width: 300px;
+  height: 300px;
+  border: 1px lightseagreen solid;
+  padding: 10px;
+}
+
+.formContainer {
+  display: flex;
+  justify-content: center;
+}
