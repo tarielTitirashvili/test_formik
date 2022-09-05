@@ -3,6 +3,7 @@ input {
   border-radius: 5px;
   padding: 3px;
   margin: 5px;
+  color: darkslategrey;
 }
 
 label {
@@ -20,4 +21,9 @@ label {
 .formContainer {
   display: flex;
   justify-content: center;
+}
+
+.inputErrors {
+  color: red;
+  font-weight: 600;
 }
