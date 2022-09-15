@@ -1,5 +1,6 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup"
 
 const initialValues = {
   name: "",
@@ -7,81 +8,44 @@ const initialValues = {
   email: "",
 };
 const onSubmit = (values) => console.log("values");
-const validate = (values) => {
-  let errors = {};
-  if (!values.name) {
-    errors.name = "name is required";
-  }
-  if (!values.lastName) {
-    errors.lastName = "lastName is required";
-  }
-  if (!values.email) {
-    errors.email = "email is required";
-  }
 
-  return errors;
-};
+const validationSchema = Yup.object({
+  name: Yup.string().required("Required"),
+  lastName: Yup.string().required("Required").min(3) ,
+  email: Yup.string().email("pleace enter valid  email address").required("Required"),
+})
 
 export default function YoutubeForm() {
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validate,
-  });
-
-  const { handleChange, values, handleSubmit, errors, handleBlur, touched } =
-    formik;
-  console.log(touched);
   return (
     <div className="formContainer">
-      <form className="form" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">name</label>
-          <input
-            name="name"
-            id="name"
-            type={"text"}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.name}
-          />
-          {errors.name && touched.name && (
-            <div className="inputErrors">{errors.name}</div>
-          )}
-        </div>
+      <Formik 
+        initialValues={initialValues} 
+        onSubmit={onSubmit} 
+        validationSchema={validationSchema} 
+        className="formContainer"
+      >
+        <Form className="form">
+          <div>
+            <label htmlFor="name">name</label>
+            <Field name="name" id="name" type={"text"} />
+            <ErrorMessage name="name" />
+          </div>
 
-        <div>
-          <label htmlFor="lastName">lastName</label>
-          <input
-            name="lastName"
-            id="lastName"
-            type={"text"}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.lastName}
-          />
-          {errors.lastName && touched.lastName && (
-            <div className="inputErrors">{errors.lastName}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="lastName">lastName</label>
+            <Field name="lastName" id="lastName" type={"text"} />
+            <ErrorMessage name="lastName" />
+          </div>
 
-        <div>
-          <label htmlFor="email">email</label>
-          <input
-            name="email"
-            id="email"
-            type={"email"}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            value={values.email}
-          />
-          {errors.email && touched.email && (
-            <div className="inputErrors">{errors.email}</div>
-          )}
-        </div>
+          <div>
+            <label htmlFor="email">email</label>
+            <Field name="email" id="email" type={"email"} />
+            <ErrorMessage name="email" />
+          </div>
 
-        <button type="submit">submit</button>
-      </form>
+          <button type="submit">submit</button>
+        </Form>
+      </Formik>
     </div>
   );
 }
