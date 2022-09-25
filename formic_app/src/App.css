@@ -11,6 +11,10 @@ label {
   display: block;
 }
 
+.error{
+  color: red
+}
+
 .form {
   width: 300px;
   height: 300px;
