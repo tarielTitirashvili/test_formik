@@ -8,7 +8,11 @@ const initialValues = {
   lastName: "",
   email: "",
   comment: "",
-  address: ""
+  address: "",
+  social: {
+    facebook: '',
+    twiter: ''
+  },
 };
 const onSubmit = (values) => console.log(values);
 
@@ -16,7 +20,9 @@ const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   lastName: Yup.string().required("Required").min(3) ,
   email: Yup.string().email("pleace enter valid  email address").required("Required"),
-  comment: Yup.string().required("Required")
+  comment: Yup.string().required("Required"),
+  facebook: Yup.string().required("Required"),
+  twiter: Yup.string().required("Required"),
 })
 
 export default function YoutubeForm() {
@@ -26,7 +32,6 @@ export default function YoutubeForm() {
         initialValues={initialValues} 
         onSubmit={onSubmit} 
         validationSchema={validationSchema} 
-        className="formContainer"
       >
         <Form className="form">
           <div>
@@ -47,7 +52,7 @@ export default function YoutubeForm() {
             <ErrorMessage name="email"> 
             {
               (message)=>{
-                return <div className="error">{message}</div>
+                return <span className="error">{message}</span>
               }
             }
             </ErrorMessage>
@@ -57,6 +62,18 @@ export default function YoutubeForm() {
             <label htmlFor="comment">comment</label>
             <Field as="textarea" name="comment" placeholder="comment" id="comment" type="text" />
             <ErrorMessage name="comment" component={ErrorMessageWiev} />
+          </div>
+
+          <div>
+            <label htmlFor="facebook">facebook</label>
+            <Field name="social.facebook" placeholder="facebook" id="facebook" type="facebook" />
+            <ErrorMessage name="facebook" component={ErrorMessageWiev} />
+          </div>
+
+          <div>
+            <label htmlFor="twiter">twiter</label>
+            <Field name="social.twiter" placeholder="twiter" id="twiter" type="twiter" />
+            <ErrorMessage name="twiter" component={ErrorMessageWiev} />
           </div>
 
           <div>

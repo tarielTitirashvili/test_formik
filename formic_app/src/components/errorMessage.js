@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function ErrorMeassage(props) {
   return (
-    <div className='error'>
+    <span className='error'>
         {props.children}
-    </div>
+    </span>
   )
 }

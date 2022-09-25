@@ -17,9 +17,8 @@ label {
 
 .form {
   width: 300px;
-  height: 300px;
   border: 1px lightseagreen solid;
-  padding: 10px;
+  padding: 20px;
 }
 
 .formContainer {
