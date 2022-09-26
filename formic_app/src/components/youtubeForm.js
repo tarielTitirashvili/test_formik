@@ -1,5 +1,5 @@
 import React from "react";
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import { Formik, Form, Field, ErrorMessage, FieldArray, FastField } from "formik";
 import * as Yup from "yup"
 import ErrorMessageView from "./errorMessage";
 
@@ -90,7 +90,7 @@ export default function YoutubeForm() {
 
           <div>
             <label htmlFor="address">Address</label>
-            <Field name="address" placeholder="address"type="text" >
+            <FastField name="address" placeholder="address"type="text" >
               {
                 (props)=>{
                   const {field, form, meta} = props
@@ -100,7 +100,7 @@ export default function YoutubeForm() {
                   </div>
                 }
               }
-            </Field>
+            </FastField>
             <ErrorMessage name="address" />
           </div>
 
