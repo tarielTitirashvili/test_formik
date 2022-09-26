@@ -42,107 +42,141 @@ export default function YoutubeForm() {
         // validateOnChange={false}
         // validateOnBlur={false}
       >
-        <Form className="form">
-          <div>
-            <label htmlFor="name">name</label>
-            <Field name="name" placeholder="name" id="name" type="text" />
-            <ErrorMessage name="name" component={ErrorMessageView} />
-          </div>
+        {
+          formik =>{
+            console.log("formic props", formik)
+            const {validateForm, validateField, setFieldTouched, setTouched} = formik
+            return(
+              <Form className="form">
+                <div>
+                  <label htmlFor="name">name</label>
+                  <Field name="name" placeholder="name" id="name" type="text" />
+                  <ErrorMessage name="name" component={ErrorMessageView} />
+                </div>
 
-          <div>
-            <label htmlFor="lastName">lastName</label>
-            <Field name="lastName" placeholder="lastName" id="lastName" type="text" />
-            <ErrorMessage name="lastName" component={ErrorMessageView} />
-          </div>
+                <div>
+                  <label htmlFor="lastName">lastName</label>
+                  <Field name="lastName" placeholder="lastName" id="lastName" type="text" />
+                  <ErrorMessage name="lastName" component={ErrorMessageView} />
+                </div>
 
-          <div>
-            <label htmlFor="email">email</label>
-            <Field name="email" placeholder="email" id="email" type="email" />
-            <ErrorMessage name="email"> 
-            {
-              (message)=>{
-                return <span className="error">{message}</span>
-              }
-            }
-            </ErrorMessage>
-          </div>
-
-          <div>
-            <label htmlFor="comment">comment</label>
-            <Field as="textarea" name="comment" placeholder="comment" id="comment" type="text" validate={validateSchema} />
-            <ErrorMessage name="comment" component={ErrorMessageView} />
-          </div>
-
-          <div>
-            <label htmlFor="facebook">facebook</label>
-            <Field name="social.facebook" placeholder="facebook" id="facebook" type="text" />
-            <ErrorMessage name="facebook" component={ErrorMessageView} />
-          </div>
-
-          <div>
-            <label htmlFor="twitter">twitter</label>
-            <Field name="social.twitter" placeholder="twitter" id="twitter" type="text" />
-            <ErrorMessage name="twitter" component={ErrorMessageView} />
-          </div>
-
-          <div>
-            <label htmlFor="mainPhone">mainPhone</label>
-            <Field name="phoneNumbers[0]" placeholder="mainPhone" id="mainPhone" type="text" />
-            <ErrorMessage name="facebook" component={ErrorMessageView} />
-          </div>
-
-          <div>
-            <label htmlFor="secondaryPhone">secondaryPhone</label>
-            <Field name="phoneNumbers[1]" placeholder="secondaryPhone" id="secondaryPhone" type="text" />
-            <ErrorMessage name="secondaryPhone" component={ErrorMessageView} />
-          </div>
-
-          <div>
-            <label htmlFor="address">Address</label>
-            <FastField name="address" placeholder="address"type="text" >
-              {
-                (props)=>{
-                  const {field, form, meta} = props
-                  return <div>
-                    <input id="address" {...field} />
-                    {meta.touched && meta.error && <div>{meta.error}</div>}
-                  </div>
-                }
-              }
-            </FastField>
-            <ErrorMessage name="address" />
-          </div>
-
-          <div>
-            <label>List of phone numbers</label>
-            <FieldArray name="phNumbers">
-              {
-                (fieldArrayProps)=>{
-                  // console.log(fieldArrayProps)
-                  const {push, remove, form} = fieldArrayProps
-                  const { values } = form
-                  const { phNumbers } = values
-                  console.log(form.errors)
-                  return<div>
-                    {
-                      phNumbers.map((number, i)=>(
-                        <div key={i}>
-                          <Field name={`phNumbers[${i}]`}/> 
-                          {
-                            i>0 && <button type="button" onClick={()=>remove(i)}> - </button>
-                          }
-                          <button type="button" onClick={()=>push(i)}> + </button>
-                        </div>
-                      ))
+                <div>
+                  <label htmlFor="email">email</label>
+                  <Field name="email" placeholder="email" id="email" type="email" />
+                  <ErrorMessage name="email"> 
+                  {
+                    (message)=>{
+                      return <span className="error">{message}</span>
                     }
-                  </div>
-                }
-              }
-            </FieldArray>
-          </div>
+                  }
+                  </ErrorMessage>
+                </div>
 
-          <button style={{width: "100px"}} type="submit">submit</button>
-        </Form>
+                <div>
+                  <label htmlFor="comment">comment</label>
+                  <Field as="textarea" name="comment" placeholder="comment" id="comment" type="text" validate={validateSchema} />
+                  <ErrorMessage name="comment" component={ErrorMessageView} />
+                </div>
+
+                <div>
+                  <label htmlFor="facebook">facebook</label>
+                  <Field name="social.facebook" placeholder="facebook" id="facebook" type="text" />
+                  <ErrorMessage name="facebook" component={ErrorMessageView} />
+                </div>
+
+                <div>
+                  <label htmlFor="twitter">twitter</label>
+                  <Field name="social.twitter" placeholder="twitter" id="twitter" type="text" />
+                  <ErrorMessage name="twitter" component={ErrorMessageView} />
+                </div>
+
+                <div>
+                  <label htmlFor="mainPhone">mainPhone</label>
+                  <Field name="phoneNumbers[0]" placeholder="mainPhone" id="mainPhone" type="text" />
+                  <ErrorMessage name="facebook" component={ErrorMessageView} />
+                </div>
+
+                <div>
+                  <label htmlFor="secondaryPhone">secondaryPhone</label>
+                  <Field name="phoneNumbers[1]" placeholder="secondaryPhone" id="secondaryPhone" type="text" />
+                  <ErrorMessage name="secondaryPhone" component={ErrorMessageView} />
+                </div>
+
+                <div>
+                  <label htmlFor="address">Address</label>
+                  <FastField name="address" placeholder="address"type="text" >
+                    {
+                      (props)=>{
+                        const {field, form, meta} = props
+                        return <div>
+                          <input id="address" {...field} />
+                          {meta.touched && meta.error && <div>{meta.error}</div>}
+                        </div>
+                      }
+                    }
+                  </FastField>
+                  <ErrorMessage name="address" />
+                </div>
+
+                <div>
+                  <label>List of phone numbers</label>
+                  <FieldArray name="phNumbers">
+                    {
+                      (fieldArrayProps)=>{
+                        // console.log(fieldArrayProps)
+                        const {push, remove, form} = fieldArrayProps
+                        const { values } = form
+                        const { phNumbers } = values
+                        // console.log(form.errors)
+                        return<div>
+                          {
+                            phNumbers.map((number, i)=>(
+                              <div key={i}>
+                                <Field name={`phNumbers[${i}]`}/> 
+                                {
+                                  i>0 && <button type="button" onClick={()=>remove(i)}> - </button>
+                                }
+                                <button type="button" onClick={()=>push(i)}> + </button>
+                              </div>
+                            ))
+                          }
+                        </div>
+                      }
+                    }
+                  </FieldArray>
+                </div>
+                <button 
+                  type="button" 
+                  onClick={
+                    ()=>{
+                      validateField('comment') 
+                      setFieldTouched('comment')
+                      }
+                    } 
+                >
+                  validate comment
+                </button>
+                <button
+                 type="button"
+                 onClick={
+                  ()=>{
+                    setTouched({
+                      name: true,
+                      lastName: true,
+                      email: true,
+                      comment: true,
+                    })
+                    validateForm()
+                    }
+                  } 
+                >
+                  validate form
+                </button>
+                <button type="submit" style={{width: "100px"}}>submit</button>
+              </Form>
+            )
+          }
+        }
       </Formik>
     </div>
   );
