@@ -16,14 +16,30 @@ const initialValues = {
   phoneNumbers: ['',''],
   phNumbers: ['']
 };
+
+const savedValues = {
+  name: "tariel",
+  lastName: "titirashvili",
+  email: "tariel@gmail.com",
+  comment: "i am not a robot",
+  address: "georgia.gori",
+  social: {
+    facebook: '',
+    twitter: ''
+  },
+  phoneNumbers: ['',''],
+  phNumbers: ['']
+};
+
 const onSubmit = (values, onSubmitProps) => { 
   console.log(values);
   onSubmitProps.setSubmitting(false)
+  onSubmitProps.resetForm()
 }
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   lastName: Yup.string().required("Required").min(3) ,
-  email: Yup.string().email("pleace enter valid  email address").required("Required"),
+  email: Yup.string().email("please enter valid  email address").required("Required"),
 })
 
 const validateSchema = value =>{
@@ -35,12 +51,14 @@ const validateSchema = value =>{
 }
 
 export default function YoutubeForm() {
+  const [ formValues, setFormValues ] = React.useState(null)
   return (
     <div className="formContainer">
       <Formik
-        initialValues={initialValues}
+        initialValues={formValues || initialValues}
         validationSchema={validationSchema}
         onSubmit={onSubmit}
+        enableReinitialize
         // validateOnMount
         // validateOnChange={false}
         // validateOnBlur={false}
@@ -174,6 +192,12 @@ export default function YoutubeForm() {
                   } 
                 >
                   validate form
+                </button>
+                <button onClick={()=>setFormValues(savedValues)} type="button">
+                  Load Saved data
+                </button>
+                <button type="reset">
+                  Reset
                 </button>
                 <button disabled={!(dirty && isValid) || isSubmitting} type="submit" style={{width: "100px"}}>submit</button>
               </Form>
