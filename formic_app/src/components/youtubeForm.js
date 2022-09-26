@@ -16,8 +16,10 @@ const initialValues = {
   phoneNumbers: ['',''],
   phNumbers: ['']
 };
-const onSubmit = (values) => console.log(values);
-
+const onSubmit = (values, onSubmitProps) => { 
+  console.log(values);
+  onSubmitProps.setSubmitting(false)
+}
 const validationSchema = Yup.object({
   name: Yup.string().required("Required"),
   lastName: Yup.string().required("Required").min(3) ,
@@ -35,17 +37,18 @@ const validateSchema = value =>{
 export default function YoutubeForm() {
   return (
     <div className="formContainer">
-      <Formik 
-        initialValues={initialValues} 
-        validationSchema={validationSchema} 
-        onSubmit={onSubmit} 
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+        // validateOnMount
         // validateOnChange={false}
         // validateOnBlur={false}
       >
         {
           formik =>{
             console.log("formic props", formik)
-            const {validateForm, validateField, setFieldTouched, setTouched} = formik
+            const {validateForm, validateField, setFieldTouched, setTouched, isValid, dirty, isSubmitting} = formik
             return(
               <Form className="form">
                 <div>
@@ -172,7 +175,7 @@ export default function YoutubeForm() {
                 >
                   validate form
                 </button>
-                <button type="submit" style={{width: "100px"}}>submit</button>
+                <button disabled={!(dirty && isValid) || isSubmitting} type="submit" style={{width: "100px"}}>submit</button>
               </Form>
             )
           }
