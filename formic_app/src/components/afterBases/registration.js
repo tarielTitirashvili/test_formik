@@ -66,6 +66,12 @@ export default function Registration() {
                 label="Mode of Contact"
                 options={options}
               />
+              <FormikControl
+                control="input"
+                type="password"
+                name="phone"
+                label="phone number"
+              />
               <button type="submit">submit</button>
             </Form>
           );
