@@ -10,6 +10,7 @@ export default function usageFormControls() {
     selectOpt: "",
     radioOpt: "",
     checkboxOption: [],
+    birthDate: null
   };
   const validationSchema = Yup.object({
     email: Yup.string().required("Required!!!"),
@@ -17,6 +18,7 @@ export default function usageFormControls() {
     selectOpt: Yup.string().required("Required!!!"),
     radioOpt: Yup.string().required("Required!!!"),
     checkboxOption: Yup.array().required('Required'),
+    birthDate: Yup.date().required().nullable()
   });
   const onSubmit = (values) => console.log("Form data", values);
 
@@ -73,6 +75,11 @@ export default function usageFormControls() {
               label="checkbox Example"
               name="checkboxOption"
               options={checkboxOptions}
+            />
+            <FormikControl
+              control="date"
+              label="date picker Example"
+              name="birthDate"
             />
             <button type="submit">submit</button>
           </Form>
