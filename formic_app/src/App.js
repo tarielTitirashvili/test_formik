@@ -1,20 +1,20 @@
 import "./App.css";
 import YoutubeForm from "./components/youtubeForm";
-import { NavLink, Route, Routes } from "react-router-dom"
-import FormContainer from "./components/afterBases/formContainer";
+import { NavLink, Route, Routes } from "react-router-dom";
+import UsageFormControls from "./components/afterBases/usageFormControls";
 
 function App() {
   return (
     <div>
-      <header >
+      <header>
         <div className="header">
           <NavLink to={"/youtube"}>youtubeForm</NavLink>
           <NavLink to={"/"}>login</NavLink>
         </div>
       </header>
       <Routes>
-        <Route path="/" element={<FormContainer/>} />
-        <Route path="/youtube" element={<YoutubeForm/>} />
+        <Route path="/" element={<UsageFormControls />} />
+        <Route path="/youtube" element={<YoutubeForm />} />
       </Routes>
     </div>
   );
