@@ -51,7 +51,7 @@ export default function EnrollmentFrom() {
                                 options={options}
                             />
                             <FormikControl 
-                                control='input'
+                                control='date'
                                 name='courseData'
                                 label='Course Date'
                             />
